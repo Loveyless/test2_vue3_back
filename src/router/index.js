@@ -14,7 +14,50 @@ const routes = [
   {
     name: "layout",
     path: "/layout",
+    redirect: "/users",
     component: () => import("../views/Layout.vue"),
+    children: [
+      {
+        path: '/users',
+        name: 'users',
+        component: () => import('@/page/users/index.vue')
+      },
+      {
+        path: '/categories',
+        name: 'categories',
+        component: () => import('@/page/categories/index.vue')
+      },
+      {
+        path: '/goods',
+        name: 'goods',
+        component: () => import('@/page/goods/index.vue')
+      },
+      {
+        path: '/orders',
+        name: 'orders',
+        component: () => import('@/page/orders/index.vue')
+      },
+      {
+        path: '/params',
+        name: 'params',
+        component: () => import('@/page/params/index.vue')
+      },
+      {
+        path: '/reports',
+        name: 'reports',
+        component: () => import('@/page/reports/index.vue')
+      },
+      {
+        path: '/rights',
+        name: 'rights',
+        component: () => import('@/page/rights/index.vue')
+      },
+      {
+        path: '/roles',
+        name: 'roles',
+        component: () => import('@/page/roles/index.vue')
+      }
+    ]
   },
 ];
 

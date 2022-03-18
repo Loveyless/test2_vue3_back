@@ -1,23 +1,34 @@
 <template>
     <el-container class="app-wrapper">
 
-      <el-aside width="200px" class="sidebar-container">
+      <el-aside :width="asideWidth" class="sidebar-container">
         <Menus></Menus>
       </el-aside>
 
+      <el-container class="container" :class="{hidderContainer : $store.state.sideType}">
 
-      <el-container class="container">
+        <el-header><Headers></Headers></el-header>
 
-        <el-header>Header</el-header>
-        <el-main>Main</el-main>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
 
       </el-container>
 
     </el-container>
 </template>
 
-<script async setup>
+<script setup>
 import Menus from "@/page/Menus.vue"
+import Headers from "@/page/Headers.vue"
+import variables from "@/styles/variables.scss"
+import { ref,computed } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore()
+const asideWidth = computed(() => { 
+  return store.state.sideType ? variables.hideSideBarWidth : variables.sideBarWidth
+})
 </script> 
 
 

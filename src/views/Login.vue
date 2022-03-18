@@ -38,6 +38,7 @@ import {Avatar,View } from "@element-plus/icons-vue"
 import axios from "@/axios"
 import { useStore } from "vuex"; //没用
 import router from '@/router'
+import {setTokenTime} from "@/utils/auth.js"
 
 const store = useStore() //没用
 
@@ -45,7 +46,7 @@ const store = useStore() //没用
 // 登录需要的数据
 const loginForm = reactive({
   username: "admin",
-  password:"12345"
+  password:"123456"
 });
 
 //表单验证
@@ -72,8 +73,10 @@ const loginHandle = ()=>{
       //发送请求
       const data = await axios.post("/login",loginForm)
       console.log("登录请求",data);
-      if(data.status == 200){
-        localStorage.setItem("token",data.status)
+      if(data.meta.status == 200){
+        // localStorage.setItem("token",data.status)
+        localStorage.setItem("token",data.data.token)
+        setTokenTime() //设置token超时时间
         //编程导航
         router.push("/layout")
       }

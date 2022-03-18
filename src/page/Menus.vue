@@ -1,62 +1,68 @@
 <template>
-  <Suspense>
-    <template v-slot:default>
+  <!-- <Suspense>
+    <template v-slot:default> -->
       <el-menu
         active-text-color="#ffd04b"
-        background-color="#545c64"
+        :background-color="variables.menuBg"
         class="el-menu-vertical-demo"
-        default-active="2"
+        :default-active="defaultActive"
         text-color="#fff"
-        @open="handleOpen"
-        @close="handleClose"
+        router
+        :unique-opened="true"
+        :collapse="$store.state.sideType"
       >
         <el-sub-menu
-          index="1"
+          :index="item.id + ''"
+          v-for="item in menusList.menu.data"
+          :key="item.id"
         >
-          <template #title>
-            <el-icon><location /></el-icon>
-            <span>Navigator One</span>
+          <template #title class="title">
+            <el-icon><grid /></el-icon>
+            <span>{{item.authName}}</span>
           </template>
 
-          <el-menu-item-group title="Group One">
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item one</el-menu-item>
-          </el-menu-item-group>
+          <el-menu-item  @click="savePath(i.path)" :index="'/' + i.path" v-for="i in item.children" :key="i.id">{{i.authName}}</el-menu-item>
 
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
-          </el-menu-item-group>
-
-          <el-sub-menu index="1-4">
-            <template #title>item four</template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
-          </el-sub-menu>
         </el-sub-menu>
       </el-menu>
-    
+<!--     
     </template>
     <template v-slot:fallback> 加载中.... </template>
-  </Suspense>
+  </Suspense> -->
 </template>
 
 
 <script setup>
-// import { reactive, Suspense } from "@vue/reactivity";
-// import axios from "@/axios";
+import variables from "@/styles/variables.scss"
+import {Grid} from "@element-plus/icons-vue"
+import { reactive,ref,toRefs, Suspense } from "vue";
+import axios from "@/axios";
 
-// //layout组件使用了
-// const menusList = await axios.get("/menus");
-// console.log("获取列表", menusList);
+//layout组件使用了
+const menusList = reactive({
+  menu:{}
+})
+const getMenusList = async ()=>{
+  menusList.menu = await axios.get("/menus");
+  console.log("获取列表", menusList.menu);
+}
+getMenusList()
 
 
 
-// :index="item.id"
-//           v-for="item in menuList.menus"
-//           :key="item.id"
+//默认路由
+const defaultActive = ref(sessionStorage.getItem("path") || "/users")
+function savePath(path){
+  sessionStorage.setItem("path",`${path}`)
+}
 </script> 
 
 
 
 
-<style>
+<style lang="scss" scoped>
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
 </style>

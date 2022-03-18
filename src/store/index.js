@@ -3,8 +3,12 @@ import login from './login'
 
 export default createStore({
   state: {
+    sideType:false
   },
   mutations: {
+    changeSideType(state){
+      state.sideType = !state.sideType
+    }
   },
   actions: {
   },
