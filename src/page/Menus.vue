@@ -18,10 +18,12 @@
         >
           <template #title class="title">
             <el-icon><grid /></el-icon>
-            <span>{{item.authName}}</span>
+            <span>{{ $t(`menus.${item.path}`) }}</span>
           </template>
 
-          <el-menu-item  @click="savePath(i.path)" :index="'/' + i.path" v-for="i in item.children" :key="i.id">{{i.authName}}</el-menu-item>
+          <el-menu-item  @click="savePath(i.path)" :index="'/' + i.path" v-for="i in item.children" :key="i.id">
+            {{ $t(`menus.${i.path}`) }}
+          </el-menu-item>
 
         </el-sub-menu>
       </el-menu>

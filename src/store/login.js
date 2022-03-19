@@ -7,9 +7,6 @@ export default {
   mutations: {
     setToken(state, token) {
       localStorage.setItem("token", token);
-    },
-  },
-  actions: {
-    //写点异步事件
-  },
+    }
+  }
 };

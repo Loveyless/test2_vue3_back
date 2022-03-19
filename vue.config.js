@@ -15,6 +15,9 @@ module.exports = {
       ]
     );
   },
+  chainWebpack: (config) => {
+    config.resolve.alias.set("vue-i18n", "vue-i18n/dist/vue-i18n.cjs.js");
+  },
   css: {
     loaderOptions: {
       sass: {
@@ -22,10 +25,10 @@ module.exports = {
         prependData: `
           @import "@/styles/variables.scss";  // scss文件地址
           @import "@/styles/mixin.scss";     // scss文件地址
-        `
-      }
-    }
-  }
+        `,
+      },
+    },
+  },
   // devServer: { //跨域代码
   //   https:false,
   //   hotOnly:false,

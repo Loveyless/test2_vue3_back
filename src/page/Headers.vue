@@ -4,6 +4,35 @@
     <el-icon @click="changeSide" class="opened"><fold /></el-icon>
   </div>
   <Breadcrumb></Breadcrumb>
+
+
+  <div class="navbar-right">
+
+  <el-dropdown style="margin-right:20px;font-weight:600">
+    <span class="el-dropdown-link">
+      Language
+    </span>
+    <template #dropdown>
+      <el-dropdown-menu>
+        <el-dropdown-item @click="changeLanguage('zh')" :disabled="currentLanguage === 'zh'">简体中文</el-dropdown-item>
+        <el-dropdown-item @click="changeLanguage('en')" :disabled="currentLanguage === 'en'">English</el-dropdown-item>
+      </el-dropdown-menu>
+    </template>
+  </el-dropdown>
+
+  <el-dropdown>
+    <span class="el-dropdown-link">
+      <el-avatar shape="square" size="default" src="https://v3.cn.vuejs.org/logo.png" />
+    </span>
+    <template #dropdown>
+      <el-dropdown-menu>
+        <el-dropdown-item @click="logout">Quit</el-dropdown-item>
+      </el-dropdown-menu>
+    </template>
+  </el-dropdown>
+
+
+  </div>
 </div> 
 </template>
 
@@ -11,11 +40,33 @@
 import Breadcrumb from '@/page/Breadcrumb.vue';
 import {Fold} from "@element-plus/icons-vue"
 import { useStore } from "vuex";
+import router from "@/router"
+import { computed } from 'vue';
+import {useI18n} from "vue-i18n"
 const store = useStore()
+const i18n = useI18n()
 
+//开关菜单缩小
 const changeSide = ()=>{
   store.commit("changeSideType")
 }
+
+//退出登录
+const logout = () => {
+  localStorage.clear()
+  router.replace("/login")
+}
+
+//获取当前语言
+const currentLanguage = computed(() => {
+  return i18n.locale.value
+})
+//切换语言
+const changeLanguage = (Language) => {
+  i18n.locale.value = Language
+  localStorage.setItem("Language",Language)
+}
+
 </script> 
 
 <style lang="scss" scoped>
@@ -35,6 +86,7 @@ const changeSide = ()=>{
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-right: 3px;
     ::v-deep .navbar-item {
       display: inline-block;
       margin-left: 18px;

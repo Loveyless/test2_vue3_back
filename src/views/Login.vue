@@ -5,7 +5,7 @@
 
       <div class="title-container">
         <h6 class="title">v:loveyless</h6>
-        <h3 class="title">登录</h3>
+        <h3 class="title">{{ $t('login.title') }}</h3>
       </div>
 
       <el-form-item prop="name">
@@ -23,7 +23,7 @@
         <el-input  @keyup.enter="loginHandle" type="password" v-model="loginForm.password"></el-input>
       </el-form-item>
 
-      <el-button @click="loginHandle" type="primary" class="login-button">登录</el-button>
+      <el-button @click="loginHandle" type="primary" class="login-button">{{ $t('login.btnTitle') }}</el-button>
 
     </el-form>
 

@@ -1,7 +1,7 @@
 <template>
   <el-breadcrumb separator="/">
     <el-breadcrumb-item v-for="item in routeList" :key="item.path">
-      {{ item.path.slice(1) }}
+      {{ $t(`menus.${item.path.slice(1)}`) }}
     </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
