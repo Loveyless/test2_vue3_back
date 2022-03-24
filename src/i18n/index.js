@@ -15,6 +15,7 @@ const i18n = createI18n({
   legacy: false, //you must set `false`, to use Composition API
   globalInjection: true, //全局函数
   locale: getCurrentLanguage() ? "en" : "zh", //语言
+  // locale: getCurrentLanguage() ? "zh" : "en", //语言
 
   messages: {
     //数据源 这个可以写上面在挂进来

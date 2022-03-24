@@ -48,7 +48,7 @@ server.interceptors.response.use(
     ElMessage({
       //成功就弹窗
       message: data.meta.msg,
-      type: data.meta.status == 200 ? "success" : "error",
+      type: data.meta.status == 200 || 201 ? "success" : "error",
       center: true,
       showClose: true,
       duration: 1000,

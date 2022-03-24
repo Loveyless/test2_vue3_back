@@ -7,7 +7,7 @@ export default createStore({
   },
   mutations: {
     changeSideType(state){
-      state.sideType = !state.sideType
+        state.sideType = !state.sideType
     }
   },
   actions: {

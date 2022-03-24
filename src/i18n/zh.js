@@ -17,7 +17,8 @@ export default {
     btnTitle: '登录'
   },
   dialog: {
-    deleteTitle: '确定要删除用户'
+    deleteTitle: '确定要删除用户',
+    title:'提示'
   },
   table: {
     username: '姓名',

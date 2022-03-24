@@ -51,10 +51,16 @@ const changeSide = ()=>{
   store.commit("changeSideType")
 }
 
+
+
 //退出登录
 const logout = () => {
   localStorage.clear()
   router.replace("/login")
+  ElMessage({
+    message: 'logout',
+    type: 'success',
+  })
 }
 
 //获取当前语言
